@@ -32,8 +32,11 @@ jobs:
         submodules: recursive
 
     - name: Get Codename #Add the codename to github env 
-      run: ${GITHUB_WORKSPACE}/docker/create-build-nilrt.sh "nilrt_codename=" >> $GITHUB_ENV
-  
+      run: ${GITHUB_WORKSPACE}/docker/create-build-nilrt.sh "NILRT_codename=" >> $GITHUB_ENV
+    
+    - name : Echo Codename
+      run: echo $NILRT_codename
+    
     - name: Build Bitbake Container  #Yeah we could just pull the image but what fun is that 
       run: ${GITHUB_WORKSPACE}/docker/create-build-nilrt.sh ${{ github.head_ref }}
 

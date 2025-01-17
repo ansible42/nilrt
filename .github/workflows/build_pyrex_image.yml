@@ -30,18 +30,12 @@ jobs:
     - uses: actions/checkout@v3
       with:
         submodules: recursive
-
-    - name: Get Codename #Add the codename to github env 
-      run: ${GITHUB_WORKSPACE}/docker/create-build-nilrt.sh "NILRT_codename=" >> $GITHUB_ENV
-    
-    - name : Echo Codename
-      run: echo $NILRT_codename
     
     - name: Build Bitbake Container  #Yeah we could just pull the image but what fun is that 
-      run: ${GITHUB_WORKSPACE}/docker/create-build-nilrt.sh ${{ github.head_ref }}
+      run: ${GITHUB_WORKSPACE}/docker/create-build-nilrt.sh
 
     - name: Verify image has been created # Verify that the image has been created
-      run: docker images ${{ env.BUILD_IMG_NAME}}  
+      run: docker images ${{ env.BUILD_IMG_NAME  }}  
 
     - name: Upload image
       uses: ishworkh/docker-image-artifact-upload@v1

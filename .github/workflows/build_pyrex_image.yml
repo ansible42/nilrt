@@ -35,12 +35,12 @@ jobs:
       run: ${GITHUB_WORKSPACE}/docker/create-build-nilrt.sh
 
     - name: Verify image has been created # Verify that the image has been created
-      run: docker images ${{ env.BUILD_IMG_NAME  }}  
+      run: docker images ${{ env.IMAGE_NAME  }}  
 
     - name: Upload image
       uses: ishworkh/docker-image-artifact-upload@v1
       with:
-        image: "build-nilrt:${{ env.nilrt_codename }}"
+        image: "${{ env.IMAGE_NAME }}: {{ env.NILRT_codename }}"
 
   
 
